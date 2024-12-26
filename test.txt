@@ -22,3 +22,11 @@
                         Current Entity: GP3
                         New Entity: STANDARD
                         
+
+                        Action UUID: 638745466853697
+                        Application Name: vol-00deaf02b72f397ed
+                        Account: Development
+                        Action Details: Scale Volume vol-00deaf02b72f397ed from GP3 to STANDARD in Development
+                        Current Entity: GP3
+                        New Entity: STANDARD
+                        
