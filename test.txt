@@ -1,1 +1,8 @@
-dd
+
+                        Action UUID: 638653613096704
+                        Application Name: Inst1-SUwoM-VU
+                        Account: Product Management SE Demo
+                        Action Details: Scale Virtual Machine Inst1-SUwoM-VU from m5.large to m6a.large in Product Management SE Demo
+                        Current Entity: m5.large
+                        New Entity: m6a.large
+                        
