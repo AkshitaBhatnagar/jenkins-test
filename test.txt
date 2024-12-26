@@ -1,12 +1,4 @@
 Action UUID: 638740735657361
-New Entity: STANDARD
-Account: Product Management SE Demo
-Action Details: Scale Volume vol-0d8b4415f6a76a1e0 from GP2 to STANDARD in Product Management SE Demo
-Current Entity: GP2
-New Entity: STANDARD
-                    
-                        
-Action UUID: 638740735657361
 Application Name: vol-0d8b4415f6a76a1e0
 Account: Product Management SE Demo
 Action Details: Scale Volume vol-0d8b4415f6a76a1e0 from GP2 to STANDARD in Product Management SE Demo
@@ -19,11 +11,4 @@ Account: Containers
 Action Details: Scale Virtual Machine ocpv-dev-hr7zs-master-0 from m5.2xlarge to r5a.xlarge in Containers
 Current Entity: m5.2xlarge
 New Entity: r5a.xlarge
-                        
-Action UUID: 638715149723920
-Application Name: instana_test
-Account: 092835335818
-Action Details: Scale Virtual Machine instana_test from t2.micro to t3.micro in 092835335818
-Current Entity: t2.micro
-New Entity: t3.micro
-                        
+    
