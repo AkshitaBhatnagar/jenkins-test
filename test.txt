@@ -25,5 +25,5 @@ Application Name: instana_test
 Account: 092835335818
 Action Details: Scale Virtual Machine instana_test from t2.micro to t3.micro in 092835335818
 Current Entity: t2.micro
-New Entity: t3
+New Entity: t3.micro
                         
