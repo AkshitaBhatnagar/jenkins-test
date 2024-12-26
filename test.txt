@@ -3,13 +3,6 @@ Application Name: vol-0d8b4415f6a76a1e0
 Account: Product Management SE Demo
 Action Details: Scale Volume vol-0d8b4415f6a76a1e0 from GP2 to STANDARD in Product Management SE Demo
 Current Entity: GP2
-New Entity: STANDARD
-                        
-
-Action UUID: 638740735657361
-Application Name: vol-0d8b4415f6a76a1e0
-Account: Product Management SE Demo
-Action Details: Scale Volume vol-0d8b4415f6a76a1e0 from GP2 to STANDARD in Product Management SE Demo
-Current Entity: GP2
-New Entity: STANDARD
+New Entity: ST
+                    
                         
