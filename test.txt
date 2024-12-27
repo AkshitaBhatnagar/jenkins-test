@@ -223,3 +223,10 @@ Action Details: Scale Virtual Machine aedev-rosa-use2-4mk9w-master-0 from r5a.xl
 Current Entity: r5a.xlarge
 New Entity: r6a.xlarge
                         
+Action UUID: 638735029676000
+Application Name: eks-qe-temp2-worker-1
+Account: Containers
+Action Details: Scale Virtual Machine eks-qe-temp2-worker-1 from t3a.xlarge to r5a.large in Containers
+Current Entity: t3a.xlarge
+New Entity: r5a.large
+                        
