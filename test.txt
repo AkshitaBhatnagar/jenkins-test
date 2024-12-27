@@ -146,3 +146,10 @@ Action Details: Scale Virtual Machine ae-rosa-417-2p26c-worker-us-west-1a-n8rcx 
 Current Entity: r5a.xlarge
 New Entity: c5a.large
                         
+Action UUID: 638714374797784
+Application Name: ocpv-dev-hr7zs-worker-ca-central-1a-msj7b
+Account: Containers
+Action Details: Scale Virtual Machine ocpv-dev-hr7zs-worker-ca-central-1a-msj7b from m5.xlarge to r5a.large in Containers
+Current Entity: m5.xlarge
+New Entity: r5a.large
+                        
