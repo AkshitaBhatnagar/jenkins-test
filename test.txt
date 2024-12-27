@@ -132,3 +132,10 @@ Action Details: Scale Virtual Machine i-0e9d74ffd7b041b06 from m5.xlarge to m5.2
 Current Entity: m5.xlarge
 New Entity: m5.2xlarge
                         
+Action UUID: 638716090506866
+Application Name: i-028d820bf48cc476f
+Account: Containers
+Action Details: Scale Virtual Machine i-028d820bf48cc476f from m5.xlarge to m5.2xlarge in Containers
+Current Entity: m5.xlarge
+New Entity: m5.2xlarge
+                        
