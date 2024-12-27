@@ -251,3 +251,10 @@ Action Details: Resize up VMem for Virtual Machine vc01 from 19 GB to 21 GB
 Current Entity: null
 New Entity: null
                         
+Action UUID: 638731008951802
+Application Name: vc01
+Account: null
+Action Details: Resize up VMem for Virtual Machine vc01 from 19 GB to 21 GB
+Current Entity: null
+New Entity: null
+                        
