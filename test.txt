@@ -111,3 +111,10 @@ Action Details: Scale Virtual Machine pt-ocp-apm-gr2qp-worker-ca-central-1a-xngf
 Current Entity: m5a.xlarge
 New Entity: m5a.large
                         
+Action UUID: 638720262057504
+Application Name: eks-cluster-eks-cluster-ng1-Node
+Account: Containers
+Action Details: Scale Virtual Machine eks-cluster-eks-cluster-ng1-Node from m5a.4xlarge to r7a.2xlarge in Containers
+Current Entity: m5a.4xlarge
+New Entity: r7a.2xlarge
+                        
