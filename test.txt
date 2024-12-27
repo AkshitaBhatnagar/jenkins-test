@@ -230,3 +230,10 @@ Action Details: Scale Virtual Machine eks-qe-temp2-worker-1 from t3a.xlarge to r
 Current Entity: t3a.xlarge
 New Entity: r5a.large
                         
+Action UUID: 638732855459984
+Application Name: i-0bf90ab4f64b6a605
+Account: Containers
+Action Details: Scale Virtual Machine i-0bf90ab4f64b6a605 from m5.xlarge to m5.2xlarge in Containers
+Current Entity: m5.xlarge
+New Entity: m5.2xlarge
+                        
