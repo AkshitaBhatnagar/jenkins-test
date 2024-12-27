@@ -6,7 +6,7 @@ Current Entity: GP2
 New Entity: STANDARD
                         
 Action UUID: 638714374797772
-Application Name: ocpv-dev-hr7zs-master-0
+Application Name: Inst1-SUwoM-VU
 Account: Containers
 Action Details: Scale Virtual Machine ocpv-dev-hr7zs-master-0 from m5.2xlarge to r5a.xlarge in Containers
 Current Entity: m5.2xlarge
