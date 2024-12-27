@@ -167,3 +167,10 @@ Action Details: Scale Virtual Machine ocpv-dev-hr7zs-worker-ca-central-1a-n87tt 
 Current Entity: m5.xlarge
 New Entity: r5a.large
                         
+Action UUID: 638715370462051
+Application Name: i-0850c12212250a8f1
+Account: Containers
+Action Details: Scale Virtual Machine i-0850c12212250a8f1 from m5.xlarge to m5.2xlarge in Containers
+Current Entity: m5.xlarge
+New Entity: m5.2xlarge
+                        
