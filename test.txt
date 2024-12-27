@@ -69,3 +69,10 @@ Action Details: Scale Virtual Machine ae-qe-ocp-use2-w856h-worker-us-east-2b-mtv
 Current Entity: m7a.xlarge
 New Entity: m6a.2xlarge
                         
+Action UUID: 638714374797768
+Application Name: ae-test-q4hqn-master-1
+Account: Containers
+Action Details: Scale Virtual Machine ae-test-q4hqn-master-1 from m5.2xlarge to r6a.xlarge in Containers
+Current Entity: m5.2xlarge
+New Entity: r6a.xlarge
+                        
