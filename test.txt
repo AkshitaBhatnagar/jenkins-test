@@ -181,3 +181,10 @@ Action Details: Scale Virtual Machine ocpv-dev-hr7zs-master-0 from m5.2xlarge to
 Current Entity: m5.2xlarge
 New Entity: r5a.xlarge
                         
+Action UUID: 638735029676002
+Application Name: eks-qe-temp2-worker-2
+Account: Containers
+Action Details: Scale Virtual Machine eks-qe-temp2-worker-2 from t3a.xlarge to r5a.large in Containers
+Current Entity: t3a.xlarge
+New Entity: r5a.large
+                        
