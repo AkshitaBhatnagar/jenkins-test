@@ -195,3 +195,10 @@ Action Details: Scale Virtual Machine ae-qe-ocp-use2-w856h-worker-us-east-2a-k8d
 Current Entity: m7a.xlarge
 New Entity: r7a.large
                         
+Action UUID: 638714374797777
+Application Name: pt-ocp-apm-gr2qp-infra-ca-central-1a-tcqfj
+Account: Containers
+Action Details: Scale Virtual Machine pt-ocp-apm-gr2qp-infra-ca-central-1a-tcqfj from r5.xlarge to r5a.xlarge in Containers
+Current Entity: r5.xlarge
+New Entity: r5a.xlarge
+                        
