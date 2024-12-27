@@ -83,3 +83,10 @@ Action Details: Scale Virtual Machine ae-qe-ocp-use2-w856h-master-0 from m6i.xla
 Current Entity: m6i.xlarge
 New Entity: r5a.large
                         
+Action UUID: 638714374797783
+Application Name: ocpv-dev-hr7zs-infra-ca-central-1a-bmpgg
+Account: Containers
+Action Details: Scale Virtual Machine ocpv-dev-hr7zs-infra-ca-central-1a-bmpgg from r5.xlarge to r5a.xlarge in Containers
+Current Entity: r5.xlarge
+New Entity: r5a.xlarge
+                        
