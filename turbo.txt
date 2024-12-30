@@ -42,3 +42,10 @@ Action Details: Scale Virtual Machine instana_test from t2.micro to t3.micro in 
 Current Entity: t2.micro
 New Entity: t3.micro
                         
+Action UUID: null
+Name: null
+Account: null
+Action Details: null
+Current Entity: null
+New Entity: null
+                        
