@@ -27,7 +27,7 @@ Name: ocpv-dev-hr7zs-master-2
 Account: Containers
 Action Details: Scale Virtual Machine ocpv-dev-hr7zs-master-2 from m5.2xlarge to r5a.xlarge in Containers
 Current Entity: m5.2xlarge
-New Entity: r5a.xlarge
+New Entity: r5a
                         
 Action UUID: 638733412034321
 Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-bmzw9
