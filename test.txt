@@ -46,147 +46,147 @@ Application Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-tkzwp
 Account: Containers
 Action Details: Scale Virtual Machine ae-test-q4hqn-ae-worker-mp-us-west-2a-tkzwp from m5.4xlarge to m6a.xlarge in Containers
 Current Entity: m5.4xlarge
-New Entity: m6a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638714374797755
 Application Name: ae-qe-ocp-use2-w856h-master-2
 Account: Containers
 Action Details: Scale Virtual Machine ae-qe-ocp-use2-w856h-master-2 from m6i.xlarge to r5a.large in Containers
 Current Entity: m6i.xlarge
-New Entity: r5a.large
+New Entity: r7a.large
                         
 Action UUID: 638738328277794
 Application Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-f2bns
 Account: Containers
 Action Details: Scale Virtual Machine ae-test-q4hqn-ae-worker-mp-us-west-2a-f2bns from r5a.2xlarge to m7a.xlarge in Containers
 Current Entity: r5a.2xlarge
-New Entity: m7a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638731127100609
 Application Name: ae-qe-ocp-use2-w856h-worker-us-east-2b-mtvkf
 Account: Containers
 Action Details: Scale Virtual Machine ae-qe-ocp-use2-w856h-worker-us-east-2b-mtvkf from m7a.xlarge to m6a.2xlarge in Containers
 Current Entity: m7a.xlarge
-New Entity: m6a.2xlarge
+New Entity: r7a.large
                         
 Action UUID: 638714374797768
 Application Name: ae-test-q4hqn-master-1
 Account: Containers
 Action Details: Scale Virtual Machine ae-test-q4hqn-master-1 from m5.2xlarge to r6a.xlarge in Containers
 Current Entity: m5.2xlarge
-New Entity: r6a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638714374797754
 Application Name: ae-qe-ocp-use2-w856h-master-0
 Account: Containers
 Action Details: Scale Virtual Machine ae-qe-ocp-use2-w856h-master-0 from m6i.xlarge to r5a.large in Containers
 Current Entity: m6i.xlarge
-New Entity: r5a.large
+New Entity: r7a.large
                         
 Action UUID: 638714374797783
 Application Name: ocpv-dev-hr7zs-infra-ca-central-1a-bmpgg
 Account: Containers
 Action Details: Scale Virtual Machine ocpv-dev-hr7zs-infra-ca-central-1a-bmpgg from r5.xlarge to r5a.xlarge in Containers
 Current Entity: r5.xlarge
-New Entity: r5a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638714374797761
 Application Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-q4d8s
 Account: Containers
 Action Details: Scale Virtual Machine ae-test-q4hqn-ae-worker-mp-us-west-2a-q4d8s from m5.4xlarge to r7a.2xlarge in Containers
 Current Entity: m5.4xlarge
-New Entity: r7a.2xlarge
+New Entity: r7a.large
                         
 Action UUID: 638731015417517
 Application Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-f72db
 Account: Containers
 Action Details: Scale Virtual Machine ae-test-q4hqn-ae-worker-mp-us-west-2a-f72db from m5.4xlarge to m6a.xlarge in Containers
 Current Entity: m5.4xlarge
-New Entity: m6a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638733603895584
 Application Name: pt-ocp-apm-gr2qp-worker-ca-central-1a-xngfk
 Account: Containers
 Action Details: Scale Virtual Machine pt-ocp-apm-gr2qp-worker-ca-central-1a-xngfk from m5a.xlarge to m5a.large in Containers
 Current Entity: m5a.xlarge
-New Entity: m5a.large
+New Entity: r7a.large
                         
 Action UUID: 638720262057504
 Application Name: eks-cluster-eks-cluster-ng1-Node
 Account: Containers
 Action Details: Scale Virtual Machine eks-cluster-eks-cluster-ng1-Node from m5a.4xlarge to r7a.2xlarge in Containers
 Current Entity: m5a.4xlarge
-New Entity: r7a.2xlarge
+New Entity: r7a.large
                         
 Action UUID: 638714374797773
 Application Name: ocpv-dev-hr7zs-worker-ca-central-1a-7xm2r
 Account: Containers
 Action Details: Scale Virtual Machine ocpv-dev-hr7zs-worker-ca-central-1a-7xm2r from m5.xlarge to r5a.large in Containers
 Current Entity: m5.xlarge
-New Entity: r5a.large
+New Entity: r7a.large
                         
 Action UUID: 638716090506865
 Application Name: i-0e9d74ffd7b041b06
 Account: Containers
 Action Details: Scale Virtual Machine i-0e9d74ffd7b041b06 from m5.xlarge to m5.2xlarge in Containers
 Current Entity: m5.xlarge
-New Entity: m5.2xlarge
+New Entity: r7a.large
                         
 Action UUID: 638716090506866
 Application Name: i-028d820bf48cc476f
 Account: Containers
 Action Details: Scale Virtual Machine i-028d820bf48cc476f from m5.xlarge to m5.2xlarge in Containers
 Current Entity: m5.xlarge
-New Entity: m5.2xlarge
+New Entity: r7a.large
                         
 Action UUID: 638731015417523
 Application Name: ae-rosa-417-2p26c-worker-us-west-1a-n8rcx
 Account: Containers
 Action Details: Scale Virtual Machine ae-rosa-417-2p26c-worker-us-west-1a-n8rcx from r5a.xlarge to c5a.large in Containers
 Current Entity: r5a.xlarge
-New Entity: c5a.large
+New Entity: r7a.large
                         
 Action UUID: 638714374797784
 Application Name: ocpv-dev-hr7zs-worker-ca-central-1a-msj7b
 Account: Containers
 Action Details: Scale Virtual Machine ocpv-dev-hr7zs-worker-ca-central-1a-msj7b from m5.xlarge to r5a.large in Containers
 Current Entity: m5.xlarge
-New Entity: r5a.large
+New Entity: r7a.large
                         
 Action UUID: 638731015417521
 Application Name: ae-rosa-417-2p26c-worker-us-west-1a-9z6rg
 Account: Containers
 Action Details: Scale Virtual Machine ae-rosa-417-2p26c-worker-us-west-1a-9z6rg from r5a.xlarge to c5a.xlarge in Containers
 Current Entity: r5a.xlarge
-New Entity: c5a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638714374797776
 Application Name: ocpv-dev-hr7zs-worker-ca-central-1a-n87tt
 Account: Containers
 Action Details: Scale Virtual Machine ocpv-dev-hr7zs-worker-ca-central-1a-n87tt from m5.xlarge to r5a.large in Containers
 Current Entity: m5.xlarge
-New Entity: r5a.large
+New Entity: r7a.large
                         
 Action UUID: 638715370462051
 Application Name: i-0850c12212250a8f1
 Account: Containers
 Action Details: Scale Virtual Machine i-0850c12212250a8f1 from m5.xlarge to m5.2xlarge in Containers
 Current Entity: m5.xlarge
-New Entity: m5.2xlarge
+New Entity: r7a.large
                         
 Action UUID: 638714374797772
 Application Name: ocpv-dev-hr7zs-master-0
 Account: Containers
 Action Details: Scale Virtual Machine ocpv-dev-hr7zs-master-0 from m5.2xlarge to r5a.xlarge in Containers
 Current Entity: m5.2xlarge
-New Entity: r5a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638735029676002
 Application Name: eks-qe-temp2-worker-2
 Account: Containers
 Action Details: Scale Virtual Machine eks-qe-temp2-worker-2 from t3a.xlarge to r5a.large in Containers
 Current Entity: t3a.xlarge
-New Entity: r5a.large
+New Entity: r7a.large
                         
 Action UUID: 638717274334451
 Application Name: ae-qe-ocp-use2-w856h-worker-us-east-2a-k8dpl
@@ -200,63 +200,63 @@ Application Name: pt-ocp-apm-gr2qp-infra-ca-central-1a-tcqfj
 Account: Containers
 Action Details: Scale Virtual Machine pt-ocp-apm-gr2qp-infra-ca-central-1a-tcqfj from r5.xlarge to r5a.xlarge in Containers
 Current Entity: r5.xlarge
-New Entity: r5a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638715370462050
 Application Name: i-006b24aca6c075158
 Account: Containers
 Action Details: Scale Virtual Machine i-006b24aca6c075158 from m5.xlarge to m5.2xlarge in Containers
 Current Entity: m5.xlarge
-New Entity: m5.2xlarge
+New Entity: r7a.large
                         
 Action UUID: 638732451816576
 Application Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-ddtww
 Account: Containers
 Action Details: Scale Virtual Machine ae-test-q4hqn-ae-worker-mp-us-west-2a-ddtww from m5.4xlarge to r7a.xlarge in Containers
 Current Entity: m5.4xlarge
-New Entity: r7a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638714374797759
 Application Name: aedev-rosa-use2-4mk9w-master-0
 Account: Containers
 Action Details: Scale Virtual Machine aedev-rosa-use2-4mk9w-master-0 from r5a.xlarge to r6a.xlarge in Containers
 Current Entity: r5a.xlarge
-New Entity: r6a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638735029676000
 Application Name: eks-qe-temp2-worker-1
 Account: Containers
 Action Details: Scale Virtual Machine eks-qe-temp2-worker-1 from t3a.xlarge to r5a.large in Containers
 Current Entity: t3a.xlarge
-New Entity: r5a.large
+New Entity: r7a.large
                         
 Action UUID: 638732855459984
 Application Name: i-0bf90ab4f64b6a605
 Account: Containers
 Action Details: Scale Virtual Machine i-0bf90ab4f64b6a605 from m5.xlarge to m5.2xlarge in Containers
 Current Entity: m5.xlarge
-New Entity: m5.2xlarge
+New Entity: r7a.large
                         
 Action UUID: 638731015417517
 Application Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-f72db
 Account: Containers
 Action Details: Scale Virtual Machine ae-test-q4hqn-ae-worker-mp-us-west-2a-f72db from m5.4xlarge to m6a.xlarge in Containers
 Current Entity: m5.4xlarge
-New Entity: m6a.xlarge
+New Entity: r7a.large
                         
 Action UUID: 638731008951802
 Application Name: vc01
 Account: null
 Action Details: Resize up VMem for Virtual Machine vc01 from 19 GB to 21 GB
 Current Entity: null
-New Entity: null
+New Entity: r7a.large
                         
 Action UUID: 638731008951802
 Application Name: vc01
 Account: null
 Action Details: Resize up VMem for Virtual Machine vc01 from 19 GB to 21 GB
 Current Entity: null
-New Entity: null
+New Entity: r7a.large
                         
 Action UUID: 638733412034321
 Application Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-bmzw9
