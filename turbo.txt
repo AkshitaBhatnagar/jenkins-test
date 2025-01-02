@@ -35,27 +35,11 @@ Account: Containers
 Action Details: Scale Virtual Machine ae-test-q4hqn-ae-worker-mp-us-west-2a-bmzw9 from m5.4xlarge to r7a.large in Containers
 Current Entity: m5.4xlarge
 New Entity: r7a
-                        
-
-Action UUID: 638680217863224
-Name: qotd-image
-Account: null
-Action Details: Resize VCPU Limit,VMem Limit for Workload Controller qotd-image in EA - Product Management
-Current Entity: qotd-image
-New Entity: qotd-image
-                        
-Action UUID: 638720262057505
-Name: i-0886c97ab6b199f3d
-Account: Containers
-Action Details: Scale Virtual Machine i-0886c97ab6b199f3d from m5.xlarge to m5.2xlarge in Containers
-Current Entity: m5.xlarge
-New Entity: m5
-                        
-
+                                             
 Action UUID: 638754513927232
 Name: ae-rosa-417-2p26c-worker-us-west-1a-n8rcx
 Account: Containers
 Action Details: Scale Virtual Machine ae-rosa-417-2p26c-worker-us-west-1a-n8rcx from r5a.xlarge to c5a.xlarge in Containers
 Current Entity: r5a.xlarge
-New Entity: c5a.xlarge
+New Entity: c5a
                         
