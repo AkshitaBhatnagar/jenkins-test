@@ -49,5 +49,5 @@ Name: i-0886c97ab6b199f3d
 Account: Containers
 Action Details: Scale Virtual Machine i-0886c97ab6b199f3d from m5.xlarge to m5.2xlarge in Containers
 Current Entity: m5.xlarge
-New Entity: m5.2xlarge
+New Entity: m5
                         
