@@ -51,3 +51,11 @@ Action Details: Scale Virtual Machine i-0886c97ab6b199f3d from m5.xlarge to m5.2
 Current Entity: m5.xlarge
 New Entity: m5
                         
+
+Action UUID: 638754513927232
+Name: ae-rosa-417-2p26c-worker-us-west-1a-n8rcx
+Account: Containers
+Action Details: Scale Virtual Machine ae-rosa-417-2p26c-worker-us-west-1a-n8rcx from r5a.xlarge to c5a.xlarge in Containers
+Current Entity: r5a.xlarge
+New Entity: c5a.xlarge
+                        
