@@ -43,3 +43,11 @@ Action Details: Scale Virtual Machine ae-rosa-417-2p26c-worker-us-west-1a-n8rcx 
 Current Entity: r5a.xlarge
 New Entity: c5a
                         
+
+Action UUID: 638736743592578
+Name: aedev-rosa-use2-4mk9w-master-2
+Account: Containers
+Action Details: Scale Virtual Machine aedev-rosa-use2-4mk9w-master-2 from r5a.xlarge to r6g.xlarge in Containers
+Current Entity: r5a.xlarge
+New Entity: r6g.xlarge
+                        
