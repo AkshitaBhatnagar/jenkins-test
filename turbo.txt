@@ -51,3 +51,11 @@ Action Details: Scale Virtual Machine aedev-rosa-use2-4mk9w-master-2 from r5a.xl
 Current Entity: r5a.xlarge
 New Entity: r6g
                         
+
+Action UUID: null
+Name: null
+Account: null
+Action Details: null
+Current Entity: null
+New Entity: null
+                        
