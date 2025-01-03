@@ -66,3 +66,10 @@ Action Details: null
 Current Entity: null
 New Entity: null
                         
+Action UUID: 638720030264760
+Name: i-0886c97ab6b199f3d
+Account: Containers
+Action Details: Scale Virtual Machine i-0886c97ab6b199f3d from m5.xlarge to m6a.xlarge in Containers
+Current Entity: m5.xlarge
+New Entity: m6a.xlarge
+                        
