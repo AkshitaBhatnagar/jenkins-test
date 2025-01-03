@@ -1,1 +1,9 @@
 
+
+Action UUID: 638755646407927
+Name: i-0980376d8b6734254
+Account: Containers
+Action Details: Scale Virtual Machine i-0980376d8b6734254 from m5.xlarge to m6a.xlarge in Containers
+Current Entity: m5.xlarge
+New Entity: m6a.xlarge
+                        
