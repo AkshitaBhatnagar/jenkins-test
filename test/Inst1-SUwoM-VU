@@ -4,5 +4,5 @@ Name: Inst1-SUwoM-VU
 Account: Containers
 Action Details: Scale Virtual Machine ae-rosa-417-2p26c-worker-us-west-1a-zgn8s from r5a.xlarge to c5a.xlarge in Containers
 Current Entity: r5a.xlarge
-New Entity: c5a
+New Entity: m6a.large
                         
