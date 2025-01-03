@@ -5,5 +5,5 @@ Name: i-0bf90ab4f64b6a605
 Account: Containers
 Action Details: Scale Virtual Machine i-0bf90ab4f64b6a605 from m5.xlarge to m6a.xlarge in Containers
 Current Entity: m5.xlarge
-New Entity: m6a.xlarge
+New Entity: m6
                         
