@@ -5,5 +5,5 @@ Name: ae-rosa-417-2p26c-worker-us-west-1a-n8rcx
 Account: Containers
 Action Details: Scale Virtual Machine ae-rosa-417-2p26c-worker-us-west-1a-n8rcx from r5a.xlarge to c6a.xlarge in Containers
 Current Entity: r5a.xlarge
-New Entity: c6a.xlarge
+New Entity: c6
                         
