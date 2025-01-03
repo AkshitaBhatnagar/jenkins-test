@@ -59,3 +59,10 @@ Action Details: null
 Current Entity: null
 New Entity: null
                         
+Action UUID: null
+Name: null
+Account: null
+Action Details: null
+Current Entity: null
+New Entity: null
+                        
