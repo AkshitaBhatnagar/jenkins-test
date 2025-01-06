@@ -139,3 +139,12 @@ New Entity: r7a.large
 Application Short Name: null
 SDG Code: null
                         
+Action UUID: 638733412034321
+Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-bmzw9
+Account: Containers
+Action Details: Scale Virtual Machine ae-test-q4hqn-ae-worker-mp-us-west-2a-bmzw9 from m5.4xlarge to r7a.large in Containers
+Current Entity: m5.4xlarge
+New Entity: r7a.large
+Application Short Name: ae-test-q4hqn-ae-worker-mp-us-west-2a-bmzw9
+SDG Code: rosa
+                        
