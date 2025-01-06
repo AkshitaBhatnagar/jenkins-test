@@ -73,3 +73,10 @@ Action Details: Scale Virtual Machine i-0886c97ab6b199f3d from m5.xlarge to m6a.
 Current Entity: m5.xlarge
 New Entity: m6a.xlarge
                         
+Action UUID: null
+Name: null
+Account: null
+Action Details: null
+Current Entity: null
+New Entity: null
+                        
