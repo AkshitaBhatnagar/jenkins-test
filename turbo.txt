@@ -184,3 +184,12 @@ New Entity: null
 Application Short Name: null
 SDG Code: null
                         
+Action UUID: null
+Name: null
+Account: null
+Action Details: null
+Current Entity: null
+New Entity: null
+Application Short Name: null
+SDG Code: null
+                        
