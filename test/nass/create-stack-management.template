@@ -531,7 +531,7 @@
         "ImageId":"ami-71f8e112",
         "InstanceMonitoring":true,
         "IamInstanceProfile": {"Ref": "InstanceProfileARN"},
-        "InstanceType": "t3.micro"
+        "InstanceType": "t2.micro"
         "KeyName":{
           "Ref":"KeyName"
         },
