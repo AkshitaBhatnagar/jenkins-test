@@ -1,1 +1,889 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "AWS::CloudFormation::Interface":{
+      "ParameterGroups":[
+        {
+          "Label":{
+            "default":"Environment Configuration"
+          },
+          "Parameters":[
+            "AppserverEnvironment",
+            "EC2InstanceNodeType",
+            "InstanceProfileARN",
+            "KeyName",
+            "VPCId"
+          ]
+        },
+        {
+          "Label":{
+            "default":"Application Configuration"
+          },
+          "Parameters":[
+            "SpringProfile",
+            "ZipkinMysqlUrl",
+            "MysqlPassword",
+            "GitPassword",
+            "AnsibleVaultPassword"
+          ]
+        },
+        {
+          "Label":{
+            "default":"Application Version Configuration"
+          },
+          "Parameters":[
+            "DiscoveryServerVersionNumber",
+            "ZipkinServerVersionNumber",
+            "ConfigServerVersionNumber"
+          ]
+        }
+      ]
+    }
+  },
+  "Description": "Management systems for TND Microservices",
+  "Mappings":{
+    "eurekaDns":{
+      "dev2":{"dnsName":"tnd-ms-eureka.dev2.assn.restest.nbn-aws.local"},
+      "dev3":{"dnsName":"tnd-ms-eureka.dev3.assn.restest.nbn-aws.local"},
+      "dev4":{"dnsName":"tnd-ms-eureka.dev4.assn.restest.nbn-aws.local"},
+      "dev6":{"dnsName":"tnd-ms-eureka.dev6.assn.restest.nbn-aws.local"},
+      "st":{"dnsName":"tnd-ms-eureka.st.assn.restest.nbn-aws.local"},
+      "sit1":{"dnsName":"tnd-ms-eureka.sit1.assn.restest.nbn-aws.local"},
+      "rsvt":{"dnsName":"tnd-ms-eureka.rsvt.assn.restest.nbn-aws.local"},
+      "psup":{"dnsName":"tnd-ms-eureka.psup.assn.resprod.nbn-aws.local"},
+      "prod":{"dnsName":"tnd-ms-eureka.prod.assn.resprod.nbn-aws.local"}
+    },
+    "ConfigBranch":{
+      "dev2":{"branchName":"develop"},
+      "dev3":{"branchName":"develop"},
+      "dev4":{"branchName":"develop"},
+      "dev6":{"branchName":"develop"},
+      "st":{"branchName":"develop"},
+      "sit1":{"branchName":"develop"},
+      "rsvt":{"branchName":"develop"},
+      "psup":{"branchName":"master"},
+      "prod":{"branchName":"master"}
+    },
+    "ZkDns":{
+      "dev2":{"dnsName":"tnd-ms-zk.dev2.assn.restest.nbn-aws.local"},
+      "dev3":{"dnsName":"tnd-ms-zk.dev3.assn.restest.nbn-aws.local"},
+      "dev4":{"dnsName":"tnd-ms-zk.dev4.assn.restest.nbn-aws.local"},
+      "dev6":{"dnsName":"tnd-ms-zk.dev6.assn.restest.nbn-aws.local"},
+      "st":{"dnsName":"tnd-ms-zk.st.assn.restest.nbn-aws.local"},
+      "sit1":{"dnsName":"tnd-ms-zk.sit1.assn.restest.nbn-aws.local"},
+      "rsvt":{"dnsName":"tnd-ms-zk.rsvt.assn.restest.nbn-aws.local"},
+      "psup":{"dnsName":"tnd-ms-zk.psup.assn.resprod.nbn-aws.local"},
+      "prod":{"dnsName":"tnd-ms-zk.prod.assn.resprod.nbn-aws.local"}
+    },
+    "KafkaDns":{
+      "dev2":{"dnsName":"tnd-ms-kafka.dev2.assn.restest.nbn-aws.local"},
+      "dev3":{"dnsName":"tnd-ms-kafka.dev3.assn.restest.nbn-aws.local"},
+      "dev4":{"dnsName":"tnd-ms-kafka.dev4.assn.restest.nbn-aws.local"},
+      "dev6":{"dnsName":"tnd-ms-kafka.dev6.assn.restest.nbn-aws.local"},
+      "st":{"dnsName":"tnd-ms-kafka.st.assn.restest.nbn-aws.local"},
+      "sit1":{"dnsName":"tnd-ms-kafka.sit1.assn.restest.nbn-aws.local"},
+      "rsvt":{"dnsName":"tnd-ms-kafka.rsvt.assn.restest.nbn-aws.local"},
+      "psup":{"dnsName":"tnd-ms-kafka.psup.assn.resprod.nbn-aws.local"},
+      "prod":{"dnsName":"tnd-ms-kafka.prod.assn.resprod.nbn-aws.local"}
+    },
+    "ZoneId":{
+      "dev2":{"dnsName":"ZEF2IJZF59LB6"},
+      "dev3":{"dnsName":"ZEF2IJZF59LB6"},
+      "dev4":{"dnsName":"ZEF2IJZF59LB6"},
+      "dev6":{"dnsName":"ZEF2IJZF59LB6"},
+      "st":{"dnsName":"ZEF2IJZF59LB6"},
+      "sit1":{"dnsName":"ZEF2IJZF59LB6"},
+      "rsvt":{"dnsName":"ZEF2IJZF59LB6"},
+      "psup":{"dnsName":"Z73WLIRPFFU44"},
+      "prod":{"dnsName":"Z73WLIRPFFU44"}
+    },
+    "domain":{
+      "dev2":{"domainName":"assn.restest.nbn-aws.local"},
+      "dev3":{"domainName":"assn.restest.nbn-aws.local"},
+      "dev4":{"domainName":"assn.restest.nbn-aws.local"},
+      "dev6":{"domainName":"assn.restest.nbn-aws.local"},
+      "st":{"domainName":"assn.restest.nbn-aws.local"},
+      "sit1":{"domainName":"assn.restest.nbn-aws.local"},
+      "rsvt":{"domainName":"assn.restest.nbn-aws.local"},
+      "psup":{"domainName":"assn.resprod.nbn-aws.local"},
+      "prod":{"domainName":"assn.resprod.nbn-aws.local"}
+    }
+  },
+  "Parameters": {
+    "SpringProfile": {
+      "Description": "Name of the environment in lowercase",
+      "AllowedValues": [
+        "development",
+        "test",
+        "production"
+      ],
+      "Type": "String",
+      "Default": "production"
+    },
+    "AppserverEnvironment": {
+      "Description": "Name of the environment in lowercase",
+      "Type": "String",
+      "AllowedValues": [
+        "dev2",
+        "dev3",
+        "dev4",
+        "dev6",
+        "st",
+        "sit1",
+        "rsvt",
+        "psup",
+        "prod"
+      ],
+      "ConstraintDescription": "must select an Environment"
+    },
+    "EC2InstanceNodeType": {
+      "Default": "t2.micro",
+      "Description": "The compute and memory capacity of the nodes in the EC2 Cluster",
+      "Type": "String",
+      "AllowedValues": [
+        "t2.micro",
+        "m4.large",
+        "m4.xlarge",
+        "m4.2xlarge",
+        "m4.4xlarge"
+      ],
+      "ConstraintDescription": "must be a valid EC2 instance type."
+    },
+    "PrometheusNodeType": {
+      "Default": "t2.micro",
+      "Description": "The compute and memory capacity of the nodes in the EC2 Cluster",
+      "Type": "String",
+      "AllowedValues": [
+        "t2.micro",
+        "m4.large",
+        "m4.xlarge",
+        "m4.2xlarge",
+        "m4.4xlarge"
+      ],
+      "ConstraintDescription": "must be a valid EC2 instance type."
+    },
+    "ZipkinMysqlUrl": {
+      "Description": "Mysql Host details , eg zipkininstance.crmbqzhmaqey.ap-southeast-2.rds.amazonaws.com:3306/zipkindb ",
+      "Type": "String"
+    },
+    "MysqlPassword":{
+      "Description": "Password for Mysql DB",
+      "Type": "String",
+      "NoEcho": true
+    },
+    "KeyName": {
+      "ConstraintDescription": "must be the name of an existing EC2 KeyPair.",
+      "Description": "Name of an existing EC2 KeyPair to enable SSH access to the instance",
+      "Type": "AWS::EC2::KeyPair::KeyName",
+      "Default": "tnd-ms"
+    },
+    "VPCId": {
+      "Description": "ID of VPC to launch EC2 instances into",
+      "Type": "AWS::EC2::VPC::Id",
+      "Default": "vpc-f1a95695"
+    },
+    "DiscoveryServerVersionNumber":{
+      "Description":"Version of Discovery Server to deploy",
+      "Type":"String"
+    },
+    "ConfigServerVersionNumber":{
+      "Description":"Version of Config Server to deploy",
+      "Type":"String"
+    },
+    "ZipkinServerVersionNumber":{
+      "Description":"Version of Zipkin Server to deploy",
+      "Type":"String"
+    },
+    "InstanceProfileARN": {
+      "Description": "Instance profile ARN",
+      "Default": "app-roles-iam-assnApp282authorInstanceProfile-1ACLDWMLJAEHC",
+      "Type": "String"
+    },
+    "GitPassword": {
+      "Description": "Password for git_dart_user to clone api-ms-infrastructure repository",
+      "Type": "String",
+      "NoEcho": true
+    },
+    "AnsibleVaultPassword": {
+      "Description": "Password to decrypt ansible-vault secrets",
+      "Type": "String",
+      "NoEcho": true
+    },
+    "ZookeeperHost":{
+      "Description":"Zookeeper Host",
+      "Type":"String"
+    }
+  },
+  "Resources": {
+    "MicroServiceManagementSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "VpcId": {
+          "Ref": "VPCId"
+        },
+        "GroupDescription": "Enable Eureka HTTP and SSH access",
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "22",
+            "ToPort": "22",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8080",
+            "ToPort": "8080",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8761",
+            "ToPort": "8761",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8585",
+            "ToPort": "8585",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "9411",
+            "ToPort": "9411",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8082",
+            "ToPort": "8082",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8000",
+            "ToPort": "8000",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "3000",
+            "ToPort": "3000",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "9090",
+            "ToPort": "9090",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "8888",
+            "ToPort": "8888",
+            "CidrIp": "0.0.0.0/0"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "api-ms-management-sg"
+          },
+          {
+            "Key": "nbn:focalPoint:sdgCode",
+            "Value": "89"
+          },
+          {
+            "Key": "nbn:focalPoint:applicationId",
+            "Value": "282"
+          }
+        ]
+      }
+    },
+    "EurekaAutoScaleGroup":{
+      "Type":"AWS::AutoScaling::AutoScalingGroup",
+      "Properties":{
+        "Cooldown":"300",
+        "DesiredCapacity": 2,
+        "HealthCheckGracePeriod":"2000",
+        "HealthCheckType":"ELB",
+        "LaunchConfigurationName":{
+          "Ref":"EurekaASGLaunchConfig"
+        },
+        "TargetGroupARNs":[{
+          "Ref":"AdminTargetGroup"
+        }],
+        "MaxSize": 3,
+        "MinSize": 2,
+        "VPCZoneIdentifier":[
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:a"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:b"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:c"
+          }
+        ],
+        "Tags": [
+          {
+            "PropagateAtLaunch": true,
+            "Key":"Name",
+            "Value":{"Fn::Join": ["", ["Eureka-", { "Ref": "AppserverEnvironment" }]]}
+          },
+          {
+            "PropagateAtLaunch": true,
+            "Key":"nbn:focalPoint:sdgCode",
+            "Value":"089"
+          },
+          {
+            "PropagateAtLaunch": true,
+            "Key": "nbn:focalPoint:applicationId",
+            "Value": "282"
+          }
+        ]
+      }
+    },
+    "EurekaASGLaunchConfig":{
+      "Type":"AWS::AutoScaling::LaunchConfiguration",
+      "Properties": {
+        "AssociatePublicIpAddress":false,
+        "ImageId":"ami-71f8e112",
+        "InstanceMonitoring":true,
+        "IamInstanceProfile": {"Ref": "InstanceProfileARN"},
+        "InstanceType":{
+          "Ref":"EC2InstanceNodeType"
+        },
+        "KeyName":{
+          "Ref":"KeyName"
+        },
+        "SecurityGroups":[
+          {
+            "Ref":"MicroServiceManagementSecurityGroup"
+          }
+        ],
+        "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
+          "#! /bin/bash -xe\n",
+          "ENV_FILE=/etc/profile.d/tnd_ms_env.sh\n",
+          "mkdir -p `dirname $ENV_FILE`\n",
+          "cat << EOF > $ENV_FILE\n",
+          "#! /bin/bash\n",
+          "export SPRING_PROFILE=",{"Ref": "SpringProfile"},"\n",
+          "export DNS_NAME=", {"Fn::FindInMap":["eurekaDns",{"Ref":"AppserverEnvironment"},"dnsName"]} ,"\n",
+          "EOF\n",
+          "chmod +x $ENV_FILE\n",
+          "source $ENV_FILE\n",
+          "cd /home/ec2-user/api-ms-infrastructure","\n",
+          "git pull\n",
+          "cd /home/ec2-user/api-ms-infrastructure/ansible\n",
+          "export ANSIBLE_VAULT_PASSWORD=", {"Ref": "AnsibleVaultPassword"}, "\n",
+          "ansible-playbook -i inventory/localhost -c local playbooks/infrastructure_min_install.yaml --vault-password-file vault/util/master-key.sh --extra-vars \"appserver_environment=", {"Ref": "AppserverEnvironment"}, " artifact_id=discovery-server", "\"", "\n",
+          "ansible-playbook -i inventory/localhost -c local playbooks/deploy_microservice.yaml --vault-password-file vault/util/master-key.sh --extra-vars \"artifact_version=", {"Ref": "DiscoveryServerVersionNumber"}, " artifact_group_id=au.com.nbnco.csa artifact_id=discovery-server appserver_environment=", {"Ref": "SpringProfile"}, "\"", "\n"
+        ]]}}
+      },
+      "DependsOn":[
+        "MicroServiceManagementSecurityGroup"
+      ]
+    },
+    "ZipkinAutoScaleGroup":{
+      "Type":"AWS::AutoScaling::AutoScalingGroup",
+      "Properties":{
+        "Cooldown":"300",
+        "DesiredCapacity": 1,
+        "HealthCheckGracePeriod":"2000",
+        "HealthCheckType":"ELB",
+        "LaunchConfigurationName":{
+          "Ref":"ZipkinASGLaunchConfig"
+        },
+        "TargetGroupARNs":[
+          {
+            "Ref":"ZipkinTargetGroup"
+          }
+        ],
+        "MaxSize": 3,
+        "MinSize": 1,
+        "VPCZoneIdentifier":[
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:a"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:b"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:c"
+          }
+        ],
+        "Tags": [
+          {
+            "PropagateAtLaunch": true,
+            "Key":"Name",
+            "Value":{"Fn::Join": ["", ["Zipkin-", { "Ref": "AppserverEnvironment" }]]}
+          },
+          {
+            "PropagateAtLaunch": true,
+            "Key":"nbn:focalPoint:sdgCode",
+            "Value":"089"
+          },
+          {
+            "PropagateAtLaunch": true,
+            "Key": "nbn:focalPoint:applicationId",
+            "Value": "282"
+          }
+        ]
+      }
+    },
+    "ZipkinASGLaunchConfig":{
+      "Type":"AWS::AutoScaling::LaunchConfiguration",
+      "Properties": {
+        "AssociatePublicIpAddress":false,
+        "ImageId":"ami-71f8e112",
+        "InstanceMonitoring":true,
+        "IamInstanceProfile": {"Ref": "InstanceProfileARN"},
+        "InstanceType":{
+          "Ref":"EC2InstanceNodeType"
+        },
+        "KeyName":{
+          "Ref":"KeyName"
+        },
+        "SecurityGroups":[
+          {
+            "Ref":"MicroServiceManagementSecurityGroup"
+          }
+        ],
+        "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
+          "#! /bin/bash -xe\n",
+          "ENV_FILE=/etc/profile.d/tnd_ms_env.sh\n",
+          "mkdir -p `dirname $ENV_FILE`\n",
+          "cat << EOF > $ENV_FILE\n",
+          "#! /bin/bash\n",
+          "export DNS_NAME=", {"Fn::FindInMap":["eurekaDns",{"Ref":"AppserverEnvironment"},"dnsName"]} ,"\n",
+          "export SPRING_PROFILE=",{"Ref": "SpringProfile"},"\n",
+          "export ZOOKEEPER_HOST=", {"Ref":"ZookeeperHost"}, "\n",
+          "export BROKER_HOST=", {"Fn::FindInMap":["KafkaDns",{"Ref":"AppserverEnvironment"},"dnsName"]},":9092", "\n",
+          "export ZIPKIN_MYSQL_URL=", { "Ref":"ZipkinMysqlUrl" }, "\n",
+          "export ZIPKIN_MYSQL_USERNAME=admin", "\n",
+          "export ZIPKIN_MYSQL_PASSWORD=", { "Ref":"MysqlPassword" }, "\n",
+          "EOF\n",
+          "chmod +x $ENV_FILE\n",
+          "source $ENV_FILE\n",
+          "cd /home/ec2-user/api-ms-infrastructure","\n",
+          "git pull\n",
+          "cd /home/ec2-user/api-ms-infrastructure/ansible\n",
+          "export ANSIBLE_VAULT_PASSWORD=", {"Ref": "AnsibleVaultPassword"}, "\n",
+          "ansible-playbook -i inventory/localhost -c local playbooks/infrastructure_min_install.yaml --vault-password-file vault/util/master-key.sh --extra-vars \"appserver_environment=", {"Ref": "AppserverEnvironment"}, " artifact_id=zipkin-server", "\"", "\n",
+          "ansible-playbook -i inventory/localhost -c local playbooks/deploy_microservice.yaml --vault-password-file vault/util/master-key.sh --extra-vars \"artifact_version=", {"Ref": "DiscoveryServerVersionNumber"}, " artifact_group_id=au.com.nbnco.csa artifact_id=zipkin-server appserver_environment=", {"Ref": "SpringProfile"}, "\"", "\n"
+        ]]}}
+      },
+      "DependsOn":[
+        "MicroServiceManagementSecurityGroup"
+      ]
+    },
+    "CloudConfigAutoScaleGroup":{
+      "Type":"AWS::AutoScaling::AutoScalingGroup",
+      "Properties":{
+        "Cooldown":"300",
+        "DesiredCapacity": 1,
+        "HealthCheckGracePeriod":"2000",
+        "HealthCheckType":"ELB",
+        "LaunchConfigurationName":{
+          "Ref":"CloudConfigASGLaunchConfig"
+        },
+        "TargetGroupARNs":[{
+          "Ref":"CloudConfigTargetGroup"
+        }],
+        "MaxSize": 3,
+        "MinSize": 1,
+        "VPCZoneIdentifier":[
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:a"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:b"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:c"
+          }
+        ],
+        "Tags": [
+          {
+            "PropagateAtLaunch": true,
+            "Key":"Name",
+            "Value":{"Fn::Join": ["", ["CloudConfig-", { "Ref": "AppserverEnvironment" }]]}
+          },
+          {
+            "PropagateAtLaunch": true,
+            "Key":"nbn:focalPoint:sdgCode",
+            "Value":"089"
+          },
+          {
+            "PropagateAtLaunch": true,
+            "Key": "nbn:focalPoint:applicationId",
+            "Value": "282"
+          }
+        ]
+      }
+    },
+    "CloudConfigASGLaunchConfig":{
+      "Type":"AWS::AutoScaling::LaunchConfiguration",
+      "Properties": {
+        "AssociatePublicIpAddress":false,
+        "ImageId":"ami-71f8e112",
+        "InstanceMonitoring":true,
+        "IamInstanceProfile": {"Ref": "InstanceProfileARN"},
+        "InstanceType": "t2.micro"
+        "KeyName":{
+          "Ref":"KeyName"
+        },
+        "SecurityGroups":[
+          {
+            "Ref":"MicroServiceManagementSecurityGroup"
+          }
+        ],
+      },
+      "DependsOn":[
+        "MicroServiceManagementSecurityGroup"
+      ]
+    },
+    "PrometheusScaleGroup":{
+      "Type":"AWS::AutoScaling::AutoScalingGroup",
+      "Properties":{
+        "Cooldown":"300",
+        "DesiredCapacity": 1,
+        "HealthCheckGracePeriod":"2000",
+        "HealthCheckType":"ELB",
+        "LaunchConfigurationName":{
+          "Ref":"PrometheusLaunchConfig"
+        },
+        "TargetGroupARNs":[
+          {
+          "Ref":"PrometheusTargetGroup"
+          },
+          {
+          "Ref":"GrafanaTargetGroup"
+          }
+        ],
+        "MaxSize": 3,
+        "MinSize": 1,
+        "VPCZoneIdentifier":[
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:a"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:b"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:c"
+          }
+        ],
+        "Tags": [
+          {
+            "PropagateAtLaunch": true,
+            "Key":"Name",
+            "Value":{"Fn::Join": ["", ["prometheus-", { "Ref": "AppserverEnvironment" }]]}
+          },
+          {
+            "PropagateAtLaunch": true,
+            "Key":"nbn:focalPoint:sdgCode",
+            "Value":"089"
+          },
+          {
+            "PropagateAtLaunch": true,
+            "Key": "nbn:focalPoint:applicationId",
+            "Value": "282"
+          }
+        ]
+      }
+    },
+    "PrometheusLaunchConfig":{
+      "Type":"AWS::AutoScaling::LaunchConfiguration",
+      "Properties": {
+        "AssociatePublicIpAddress":false,
+        "ImageId":"ami-4bc1d828",
+        "InstanceMonitoring":true,
+        "IamInstanceProfile": {"Ref": "InstanceProfileARN"},
+        "InstanceType":{
+          "Ref":"PrometheusNodeType"
+        },
+        "KeyName":{
+          "Ref":"KeyName"
+        },
+        "SecurityGroups":[
+          {
+            "Ref":"MicroServiceManagementSecurityGroup"
+          }
+        ],
+        "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
+          "#! /bin/bash -xe\n",
+          "yum install go -y\n",
+          "git -c http.sslVerify=false clone -b develop https://git_dart_user:", {"Ref": "GitPassword"}, "@git.nbnco.net.au/csa/api-ms-infrastructure.git\n",
+          "mkdir -p /etc/prometheus/files \n",
+          "export ANSIBLE_VAULT_PASSWORD=", {"Ref": "AnsibleVaultPassword"}, "\n",
+          "export GOPATH=/api-ms-infrastructure/ansible/scripts/\n",
+          "export GOROOT=/usr/lib/golang/\n",
+          "export GOBIN=/api-ms-infrastructure/ansible/scripts/bin\n",
+          "go get -v -insecure github.com/goamz/goamz/aws","\n",
+          "go get -v -insecure github.com/goamz/goamz/ec2","\n",
+          "go install /api-ms-infrastructure/ansible/scripts/prometheus.go\n",
+          "cd /api-ms-infrastructure/ansible\n",
+          "ansible-playbook -i inventory/localhost -c local playbooks/cron.yaml --vault-password-file vault/util/master-key.sh --extra-vars \"appserver_environment=", {"Ref": "AppserverEnvironment"},"\"","\n",
+          "service docker start\n",
+          "docker run -d --name=prometheus  -p 9090:9090  -v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml -v /etc/prometheus/files:/tmp/files prom/prometheus","\n",
+          "cd /home/ec2-user/grafana\n",
+          "nohup bin/grafana-server &"
+        ]]}}
+      },
+      "DependsOn":[
+        "MicroServiceManagementSecurityGroup"
+      ]
+    },
 
+    "AdminTargetGroup":{
+      "Type":"AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties":{
+        "Name":{"Fn::Join": ["", ["Adminserver-", { "Ref": "AppserverEnvironment" }]]},
+        "HealthCheckIntervalSeconds":"15",
+        "HealthCheckPath":"/health",
+        "HealthCheckPort":"8761",
+        "HealthCheckProtocol":"HTTP",
+        "HealthCheckTimeoutSeconds":10,
+        "HealthyThresholdCount": 3,
+        "Port":8761,
+        "Protocol":"HTTP",
+        "UnhealthyThresholdCount":5,
+        "VpcId":{
+          "Ref":"VPCId"
+        }
+      }
+    },
+    "ZipkinTargetGroup":{
+      "Type":"AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties":{
+        "Name":{"Fn::Join": ["", ["Zipkin-", { "Ref": "AppserverEnvironment" }]]},
+        "HealthCheckIntervalSeconds":"15",
+        "HealthCheckPath":"/",
+        "HealthCheckPort":"9411",
+        "HealthCheckProtocol":"HTTP",
+        "HealthCheckTimeoutSeconds":10,
+        "HealthyThresholdCount": 3,
+        "Port":9411,
+        "Protocol":"HTTP",
+        "UnhealthyThresholdCount":5,
+        "VpcId":{
+          "Ref":"VPCId"
+        }
+      }
+    },
+    "CloudConfigTargetGroup":{
+      "Type":"AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties":{
+        "Name":{"Fn::Join": ["", ["CloudConfig-", { "Ref": "AppserverEnvironment" }]]},
+        "HealthCheckIntervalSeconds":"15",
+        "HealthCheckPath":"/",
+        "HealthCheckPort":"8888",
+        "HealthCheckProtocol":"HTTP",
+        "HealthCheckTimeoutSeconds":10,
+        "HealthyThresholdCount": 3,
+        "Port":8888,
+        "Protocol":"HTTP",
+        "Matcher":{
+          "HttpCode":"200,404"
+        },
+        "UnhealthyThresholdCount":5,
+        "VpcId":{
+          "Ref":"VPCId"
+        }
+      }
+    },
+    "GrafanaTargetGroup":{
+      "Type":"AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties":{
+        "Name":{"Fn::Join": ["", ["grafana-", { "Ref": "AppserverEnvironment" }]]},
+        "HealthCheckIntervalSeconds":"15",
+        "HealthCheckPath":"/",
+        "HealthCheckPort":"3000",
+        "HealthCheckProtocol":"HTTP",
+        "HealthCheckTimeoutSeconds":10,
+        "HealthyThresholdCount": 3,
+        "Port":3000,
+        "Protocol":"HTTP",
+        "Matcher":{
+          "HttpCode":"200-499"
+        },
+        "UnhealthyThresholdCount":5,
+        "VpcId":{
+          "Ref":"VPCId"
+        }
+      }
+    },
+    "PrometheusTargetGroup":{
+      "Type":"AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties":{
+        "Name":{"Fn::Join": ["", ["Prometheus-", { "Ref": "AppserverEnvironment" }]]},
+        "HealthCheckIntervalSeconds":"15",
+        "HealthCheckPath":"/",
+        "HealthCheckPort":"9090",
+        "HealthCheckProtocol":"HTTP",
+        "HealthCheckTimeoutSeconds":10,
+        "HealthyThresholdCount": 3,
+        "Port":9090,
+        "Protocol":"HTTP",
+        "Matcher":{
+          "HttpCode":"200-499"
+        },
+        "UnhealthyThresholdCount":5,
+        "VpcId":{
+          "Ref":"VPCId"
+        }
+      }
+    },
+
+    "AdminListener":{
+      "Type":"AWS::ElasticLoadBalancingV2::Listener",
+      "Properties":{
+        "DefaultActions":[
+          {
+            "TargetGroupArn":{
+              "Ref":"AdminTargetGroup"
+            },
+            "Type":"forward"
+          }
+        ],
+        "LoadBalancerArn":{
+          "Ref":"LoadBalancer"
+        },
+        "Port":8761,
+        "Protocol":"HTTP"
+      }
+    },
+    "ZipkinListener":{
+      "Type":"AWS::ElasticLoadBalancingV2::Listener",
+      "Properties":{
+        "DefaultActions":[
+          {
+            "TargetGroupArn":{
+              "Ref":"ZipkinTargetGroup"
+            },
+            "Type":"forward"
+          }
+        ],
+        "LoadBalancerArn":{
+          "Ref":"LoadBalancer"
+        },
+        "Port":9411,
+        "Protocol":"HTTP"
+      }
+    },
+    "CloudConfigListener":{
+      "Type":"AWS::ElasticLoadBalancingV2::Listener",
+      "Properties":{
+        "DefaultActions":[
+          {
+            "TargetGroupArn":{
+              "Ref":"CloudConfigTargetGroup"
+            },
+            "Type":"forward"
+          }
+        ],
+        "LoadBalancerArn":{
+          "Ref":"LoadBalancer"
+        },
+        "Port":8888,
+        "Protocol":"HTTP"
+      }
+    },
+    "GrafanaListener":{
+      "Type":"AWS::ElasticLoadBalancingV2::Listener",
+      "Properties":{
+        "DefaultActions":[
+          {
+            "TargetGroupArn":{
+              "Ref":"GrafanaTargetGroup"
+            },
+            "Type":"forward"
+          }
+        ],
+        "LoadBalancerArn":{
+          "Ref":"LoadBalancer"
+        },
+        "Port":3000,
+        "Protocol":"HTTP"
+      }
+    },
+    "PrometheusListener":{
+      "Type":"AWS::ElasticLoadBalancingV2::Listener",
+      "Properties":{
+        "DefaultActions":[
+          {
+            "TargetGroupArn":{
+              "Ref":"PrometheusTargetGroup"
+            },
+            "Type":"forward"
+          }
+        ],
+        "LoadBalancerArn":{
+          "Ref":"LoadBalancer"
+        },
+        "Port":9090,
+        "Protocol":"HTTP"
+      }
+    },
+    "LoadBalancer":{
+      "Type":"AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "Properties":{
+        "Name":{"Fn::Join": ["", ["tnd-ms-tools-alb-", { "Ref": "AppserverEnvironment" }]]},
+
+        "Scheme":"internal",
+        "Subnets":[
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:a"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:b"
+          },
+          {
+            "Fn::ImportValue": "subnet:vpc1:application:c"
+          }
+        ],
+        "SecurityGroups":[{
+          "Ref":"MicroServiceManagementSecurityGroup"
+        }],
+        "Tags":[
+          {
+            "Key":"Name",
+            "Value":{"Fn::Join": ["", ["tnd-ms-tools-alb-", { "Ref": "AppserverEnvironment" }]]}
+          },
+          {
+            "Key":"nbn:focalPoint:sdgCode",
+            "Value":"089"
+          },
+          {
+            "Key": "nbn:focalPoint:applicationId",
+            "Value": "282"
+          }
+        ]
+       }
+    },
+    "MonitoringDns":{
+      "Type":"AWS::Route53::RecordSet",
+      "Properties":{
+        "Name":{"Fn::Join": [".", ["tnd-ms-tools", { "Ref": "AppserverEnvironment" },{"Fn::FindInMap":[
+          "domain",{"Ref":"AppserverEnvironment"},"domainName"]}]]},
+        "Type":"A",
+        "HostedZoneId":{"Fn::FindInMap":[
+          "ZoneId",{"Ref":"AppserverEnvironment"},"dnsName"]},
+        "AliasTarget":{
+          "DNSName" : { "Fn::GetAtt" : [ "LoadBalancer", "DNSName" ]},
+          "EvaluateTargetHealth": true,
+          "HostedZoneId" : { "Fn::GetAtt" : [ "LoadBalancer", "CanonicalHostedZoneID" ]}
+        }
+      }
+    }
+  },
+  "Outputs": {
+   "MonitorDNS":{
+     "Description":"DNS record for monitoring component",
+     "Value":{"Ref":"MonitoringDns"}
+   }
+  }
+}
