@@ -198,7 +198,7 @@ Name: i-0fd7ff80aa9827e4e
 Account: Containers
 Action Details: Scale Virtual Machine i-0fd7ff80aa9827e4e from m5.xlarge to m6a.xlarge in Containers
 Current Entity: m5.xlarge
-New Entity: m6a.xlarge
+New Entity: m6a
 Application Short Name: null
 SDG Code: null
                         
