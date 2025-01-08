@@ -193,3 +193,12 @@ New Entity: null
 Application Short Name: null
 SDG Code: null
                         
+Action UUID: 638757088701825
+Name: i-0fd7ff80aa9827e4e
+Account: Containers
+Action Details: Scale Virtual Machine i-0fd7ff80aa9827e4e from m5.xlarge to m6a.xlarge in Containers
+Current Entity: m5.xlarge
+New Entity: m6a.xlarge
+Application Short Name: null
+SDG Code: null
+                        
