@@ -35,6 +35,11 @@ pipeline {
     		    sh 'ls -R'
                     turbo_util = load 'utils/util.groovy'
 		    echo "Loaded turbo_util: ${turbo_util}"
+		    if (turbo_util) {
+        		echo "UpdateInstance method exists: ${turbo_util.UpdateInstance != null}"
+    		  } else {
+       		 echo "Failed to load turbo_util correctly"
+   		 }
                 }
             }
         }
@@ -70,7 +75,7 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'turbo_token', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
                                             
                         // Call the updateInstance method from the util
-                    
+                    	    echo "UpdateInstance method called with ${GITHUB_USERNAME}, ${GITHUB_TOKEN}, ${payload_account}, ${currententity}, ${newentity}"
                             turbo_util.UpdateInstance(GITHUB_USERNAME, GITHUB_TOKEN, env.account, env.currententity, env.newentity)
                         }
                     } catch (Exception e) {
