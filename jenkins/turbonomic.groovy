@@ -71,7 +71,7 @@ pipeline {
                                             
                         // Call the updateInstance method from the util
                     
-                            turbo_util.UpdateInstance(GITHUB_USERNAME, GITHUB_TOKEN, account, currententity, newentity)
+                            turbo_util.UpdateInstance(GITHUB_USERNAME, GITHUB_TOKEN, env.account, env.currententity, env.newentity)
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
