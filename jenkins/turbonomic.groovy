@@ -36,12 +36,8 @@ pipeline {
                         turbo_util = load 'utils/util.groovy'
                         echo "Loaded turbo_util: ${turbo_util}"
                         // Check if the method exists in the loaded object
-                        if (turbo_util && turbo_util.UpdateInstance) {
-                            echo "UpdateInstance method exists"
-                        } else {
-                            echo "UpdateInstance method does not exist!"
-                            error "UpdateInstance method not found"
-                        }
+                        def allProperties = turbo_util.properties
+                	echo "All properties and methods in turbo_util: ${allProperties.keySet()}"
                     } catch (Exception e) {
                         echo "Error during Load Util: ${e.message}"
                         currentBuild.result = 'FAILURE'
