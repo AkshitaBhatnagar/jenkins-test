@@ -10,7 +10,7 @@ def APPLICATION_CONFIG = [
 
 
 def UpdateInstance(GITHUB_USERNAME, GITHUB_TOKEN, payload_account, currententity, newentity) {
-
+    echo "UpdateInstance method called with ${GITHUB_USERNAME}, ${GITHUB_TOKEN}, ${payload_account}, ${currententity}, ${newentity}"
     def GITHUB_REPO = 'https://github.com/AkshitaBhatnagar/jenkins-test.git'
     // def GITHUB_REPO = 'https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/jenkins-test.git' 
     def BRANCH = 'main'  // Ensure this is the correct branch name
