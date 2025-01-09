@@ -31,6 +31,7 @@ pipeline {
                 script {
                     echo "Loading Util"
                     turbo_util = load 'utils/util.groovy'
+		    echo "Loaded turbo_util: ${turbo_util}"
                 }
             }
         }
