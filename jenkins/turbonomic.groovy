@@ -41,13 +41,7 @@ pipeline {
 	       turbo_util = load 'utils/util.groovy'
 	       echo "Loaded turbo_util: ${turbo_util}"
 	       echo "Loaded turbo_util: ${turbo_util}"
-	       try {
-                        turbo_util.UpdateInstance(GITHUB_USERNAME, GITHUB_TOKEN, env.account, env.currententity, env.newentity)
-                    } catch (Exception e) {
-                        echo "Error calling UpdateInstance: ${e.getMessage()}"
-                        currentBuild.result = 'FAILURE'
-                        error "Failed to call UpdateInstance method"
-                    }
+	       
                echo "Methods in turbo_util: ${turbo_util.metaClass.methods.collect { it.name }}"
 
 
@@ -96,7 +90,7 @@ pipeline {
                                             
                         // Call the updateInstance method from the util
                     	    echo "UpdateInstance method called with ${GITHUB_USERNAME}, ${GITHUB_TOKEN}, ${payload_account}, ${currententity}, ${newentity}"
-                            turbo_util.UpdateInstance(GITHUB_USERNAME, GITHUB_TOKEN, env.account, env.currententity, env.newentity)
+                            turbo_util.UpdateInstance(env.GITHUB_USERNAME, env.GITHUB_TOKEN, env.account, env.currententity, env.newentity)
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
