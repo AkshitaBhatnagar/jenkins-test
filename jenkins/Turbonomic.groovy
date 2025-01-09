@@ -13,7 +13,7 @@ pipeline {
                [key: 'sdgCode', value: '$.target.tags["red-hat-clustertype"][0]']
             ],
             causeString: 'Triggered by webhook',
-            token: 'append',  // Optional token for security
+            token: 'turbo',  // Optional token for security
             printContributedVariables: true,
             printPostContent: true
         )
