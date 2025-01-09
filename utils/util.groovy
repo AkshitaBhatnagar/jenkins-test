@@ -89,4 +89,4 @@ def UpdateInstance(GITHUB_USERNAME, GITHUB_TOKEN, payload_account, currententity
     }
 }
 
-return [UpdateInstance: UpdateInstance]
+return this
