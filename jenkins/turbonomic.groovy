@@ -56,7 +56,7 @@ pipeline {
             }
         }
     }
-}
+
 
         stage('Inspect Environment Variables') {
             steps {
