@@ -36,7 +36,7 @@ pipeline {
                         turbo_util = load 'utils/util.groovy'
                         echo "Loaded turbo_util: ${turbo_util}"
                         // Check if the method exists in the loaded object
-                        if (turbo_util && turbo_util.respondsTo('UpdateInstance')) {
+                        if (turbo_util.getClass().getDeclaredMethods().any { it.name == 'UpdateInstance' }) {
                             echo "UpdateInstance method exists"
                         } else {
                             echo "UpdateInstance method does not exist!"
