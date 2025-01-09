@@ -1,5 +1,5 @@
 import groovy.transform.Field
-
+println "utils/util.groovy is being loaded successfully"
 @Field
 def APPLICATION_CONFIG = [
 
