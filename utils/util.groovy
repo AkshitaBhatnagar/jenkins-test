@@ -3,8 +3,8 @@ import groovy.transform.Field
 @Field
 def APPLICATION_CONFIG = [
 
-        "Containers": [ "applicationName": "cedw", "filepath": "aws/cedw/etl.tfvars", "type": "terraform" ],
-        "Development": [ "applicationName": "nass", "filepath": "aws/nass/create-stack-management.template", "type":"cfn" ],
+        "Containers": [ "applicationName": "cedw", "filepath": "test/cedw/etl.tfvars", "type": "terraform" ],
+        "Development": [ "applicationName": "nass", "filepath": "test/nass/create-stack-management.template", "type":"cfn" ],
     
 ]
 
