@@ -30,6 +30,9 @@ pipeline {
             steps {
                 script {
                     echo "Loading Util"
+		    echo "Current workspace: ${pwd()}"
+   		    echo "Listing files in the workspace:"
+    		    sh 'ls -R'
                     turbo_util = load 'utils/util.groovy'
 		    echo "Loaded turbo_util: ${turbo_util}"
                 }
