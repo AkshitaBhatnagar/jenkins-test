@@ -31,16 +31,12 @@ pipeline {
                 script {
                     try {
                         echo "Loading Util"
-                        echo "Current workspace: ${pwd()}"
-                        echo "Listing files in the workspace:"
-                        sh 'ls -R'
+                        
                         // Attempt to load the util.groovy script
                         turbo_util = load 'utils/util.groovy'
                         echo "Loaded turbo_util: ${turbo_util}"
-                        echo "Methods in turbo_util: ${turbo_util.metaClass.methods.collect { it.name }}"
-                        
                         // Check if the method exists in the loaded object
-                        if (turbo_util && turbo_util.metaClass.hasMetaMethod('UpdateInstance')) {
+                        if (turbo_util && turbo_util.respondsTo('UpdateInstance')) {
                             echo "UpdateInstance method exists"
                         } else {
                             echo "UpdateInstance method does not exist!"
