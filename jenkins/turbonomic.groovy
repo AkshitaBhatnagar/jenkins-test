@@ -36,23 +36,21 @@ pipeline {
                 // List all files recursively in the workspace to verify file location
                 sh 'ls -R'
 
-                try {
-                    // Attempt to load the util.groovy script
-                    turbo_util = load 'utils/util.groovy'
-                    echo "Loaded turbo_util: ${turbo_util}"
+                
+	    // Attempt to load the util.groovy script
+	       turbo_util = load 'utils/util.groovy'
+	       echo "Loaded turbo_util: ${turbo_util}"
+	       echo "Loaded turbo_util: ${turbo_util}"
+               echo "Methods in turbo_util: ${turbo_util.metaClass.methods.collect { it.name }}"
 
-                    // Check if the method exists in the loaded object
-                    if (turbo_util) {
-                        echo "UpdateInstance method exists: ${turbo_util.UpdateInstance != null}"
-                    } else {
-                        echo "Failed to load turbo_util correctly"
-                    }
-                } catch (Exception e) {
-                    // Handle failure if loading the file fails
-                    echo "Error loading util.groovy: ${e.message}"
-                    currentBuild.result = 'FAILURE'
-                    error "Failed to load util.groovy"
-                }
+
+	    // Check if the method exists in the loaded object
+	       if (turbo_util) {
+		   echo "UpdateInstance method exists: ${turbo_util.UpdateInstance != null}"
+	    }  else {
+		 echo "Failed to load turbo_util correctly"
+	    }
+	 
             }
         }
     }
