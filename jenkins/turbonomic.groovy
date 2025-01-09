@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     echo "Loading Util"
-                    turbo_util = load 'Utils/Util.groovy'
+                    turbo_util = load 'utils/util.groovy'
                 }
             }
         }
