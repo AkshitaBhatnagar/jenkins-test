@@ -66,25 +66,25 @@ def UpdateInstance(GITHUB_USERNAME, GITHUB_TOKEN, payload_account, currententity
                     return match[0]
                 }
 
-            // If the content was modified, write it back to the template file
-            if (changesMade) {
-                writeFile(file: filePath, text: updatedTemplateContent)
+                // If the content was modified, write it back to the template file
+                if (changesMade) {
+                    writeFile(file: filePath, text: updatedTemplateContent)
+                }
             }
-        }
 
-        // If any changes were made, commit and push to GitHub
-        if (changesMade) {
-            echo "Changes detected. Committing and pushing to GitHub."
-            sh """
-                git add .
-                git commit -m "${COMMIT_MESSAGE}"
-                git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/jenkins-test.git ${BRANCH}
-            """
-        } else {
-            // No changes, skip commit and push
-            echo "No changes detected, skipping commit and push."
-        }
+            // If any changes were made, commit and push to GitHub
+            if (changesMade) {
+                echo "Changes detected. Committing and pushing to GitHub."
+                sh """
+                    git add .
+                    git commit -m "${COMMIT_MESSAGE}"
+                    git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/jenkins-test.git ${BRANCH}
+                """
+            } else {
+                // No changes, skip commit and push
+                echo "No changes detected, skipping commit and push."
+            }
 
+        }
     }
-}
 }
