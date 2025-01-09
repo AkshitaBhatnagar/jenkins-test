@@ -22,27 +22,42 @@ pipeline {
         )
     }
     stages {
-		stage('Load Util') {
-            options {
-                timeout(time: 60, unit: 'MINUTES')
-                retry(1)
-            }
-            steps {
-                script {
-                    echo "Loading Util"
-		    echo "Current workspace: ${pwd()}"
-   		    echo "Listing files in the workspace:"
-    		    sh 'ls -R'
+    stage('Load Util') {
+        options {
+            timeout(time: 60, unit: 'MINUTES')  // Timeout set to 60 minutes
+            retry(1)                            // Retry once if the stage fails
+        }
+        steps {
+            script {
+                echo "Loading Util"
+                echo "Current workspace: ${pwd()}"
+                echo "Listing files in the workspace:"
+                
+                // List all files recursively in the workspace to verify file location
+                sh 'ls -R'
+
+                try {
+                    // Attempt to load the util.groovy script
                     turbo_util = load 'utils/util.groovy'
-		    echo "Loaded turbo_util: ${turbo_util}"
-		    if (turbo_util) {
-        		echo "UpdateInstance method exists: ${turbo_util.UpdateInstance != null}"
-    		  } else {
-       		 echo "Failed to load turbo_util correctly"
-   		 }
+                    echo "Loaded turbo_util: ${turbo_util}"
+
+                    // Check if the method exists in the loaded object
+                    if (turbo_util) {
+                        echo "UpdateInstance method exists: ${turbo_util.UpdateInstance != null}"
+                    } else {
+                        echo "Failed to load turbo_util correctly"
+                    }
+                } catch (Exception e) {
+                    // Handle failure if loading the file fails
+                    echo "Error loading util.groovy: ${e.message}"
+                    currentBuild.result = 'FAILURE'
+                    error "Failed to load util.groovy"
                 }
             }
         }
+    }
+}
+
         stage('Inspect Environment Variables') {
             steps {
                 script {
