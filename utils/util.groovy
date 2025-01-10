@@ -16,9 +16,9 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
     def BRANCH = 'main'  // Ensure this is the correct branch name
     def NEWBRANCH = 'turbo_change'
     def COMMIT_MESSAGE = 'Updated Instance type from turbonomic via Jenkins pipeline'
-    
+    sh "rm -rf jenkins-test"
     // Clone the repository
-    sh "git clone https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/jenkins-test.git"
+    sh "git clone https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/AkshitaBhatnagar/jenkins-test.git"
     
     dir('jenkins-test') {
         def changesMade = false  // Flag to track if changes are made
