@@ -78,8 +78,8 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
                 echo "Changes detected. Committing and pushing to GitHub."
                 // Checkout the latest 'main' branch to get the latest changes
                 sh """
-                    git checkout ${MAINBRANCH}
-                    git pull origin ${MAINBRANCH}
+                    git checkout ${BRANCH}
+                    git pull origin ${BRANCH}
                 """
                 // Check if the turbo_change branch already exists
                 def branchExists = sh(script: "git show-ref refs/heads/${NEWBRANCH}", returnStatus: true)
