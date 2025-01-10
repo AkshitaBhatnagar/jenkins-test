@@ -77,14 +77,26 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
             if (changesMade) {
                 echo "Changes detected. Committing and pushing to GitHub."
                 sh """
-                    git fetch origin
                     git checkout ${BRANCH}
                     git pull origin ${BRANCH}
                     
-                    # Check if the turbo_change branch exists, if not, create it
-                    # git checkout -b ${NEWBRANCH} || 
-                    git checkout ${NEWBRANCH}
-                    git pull origin ${NEWBRANCH} --no-rebase
+                   """
+                    def branchExists = sh(script: "git show-ref refs/heads/${NEWBRANCH}", returnStatus: true)
+                    if (branchExists == 0) {
+                    // If the turbo_change branch exists, checkout to that branch
+                            echo "Switching to existing branch '${NEWBRANCH}'"
+                            sh """
+                                git checkout ${NEWBRANCH}
+                                git pull origin ${NEWBRANCH}
+                            """
+                    } else {
+                    // If the turbo_change branch does not exist, create it
+                            echo "Creating new branch '${NEWBRANCH}'"
+                            sh """
+                                git checkout -b ${NEWBRANCH}
+                            """
+                    }
+                sh """
                     git add .
                     git commit -m "${COMMIT_MESSAGE}"
                     git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/AkshitaBhatnagar/jenkins-test.git ${NEWBRANCH}
