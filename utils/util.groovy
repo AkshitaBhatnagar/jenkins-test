@@ -83,7 +83,7 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
                 """
                 // Check if the turbo_change branch already exists
                 def branchExists = sh(script: "git show-ref refs/heads/${NEWBRANCH}", returnStatus: true)
-
+                echo "${branchExists}"
                 if (branchExists == 0) {
                     // If the turbo_change branch exists, checkout to that branch
                     echo "Switching to existing branch '${NEWBRANCH}'"
