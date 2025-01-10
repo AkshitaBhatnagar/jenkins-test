@@ -78,7 +78,7 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
                 echo "Changes detected. Committing and pushing to GitHub."
                 // Checkout the latest 'main' branch to get the latest changes
                 sh """
-                    git fetch -all
+                    git fetch --all
                     git checkout ${BRANCH}
                     git pull origin ${BRANCH}
                 """
