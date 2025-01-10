@@ -26,7 +26,22 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
         if (appConfig) {
             def filePath = appConfig['filepath']
             def fileType = appConfig['type']
+            // Checkout the main branch and pull the latest changes from the main branch
+            sh "git checkout main"
+            sh "git pull origin main"
 
+            // Check if turbo_change branch exists, if not, create it
+            def branchExists = sh(script: "git show-ref refs/heads/${NEWBRANCH}", returnStatus: true) == 0
+
+            if (!branchExists) {
+                echo "Branch ${NEWBRANCH} does not exist. Creating the branch."
+                sh "git checkout -b ${NEWBRANCH}"
+            } else {
+                echo "Branch ${NEWBRANCH} exists. Checking out the branch."
+                sh "git checkout ${NEWBRANCH}"
+                // Ensure it is up to date with the remote turbo_change branch
+                sh "git pull origin ${NEWBRANCH}"
+            }
             if (fileType == 'terraform') {
                 
                 // Read the content of the tfvars file
@@ -76,26 +91,7 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
             // If any changes were made, commit and push to GitHub
             if (changesMade) {
                 echo "Changes detected. Committing and pushing to GitHub."
-                sh """
-                    git checkout ${BRANCH}
-                    git pull origin ${BRANCH}
-                    
-                   """
-                    def branchExists = sh(script: "git show-ref refs/heads/${NEWBRANCH}", returnStatus: true)
-                    if (branchExists == 0) {
-                    // If the turbo_change branch exists, checkout to that branch
-                            echo "Switching to existing branch '${NEWBRANCH}'"
-                            sh """
-                                git checkout ${NEWBRANCH}
-                                git pull origin ${NEWBRANCH}
-                            """
-                    } else {
-                    // If the turbo_change branch does not exist, create it
-                            echo "Creating new branch '${NEWBRANCH}'"
-                            sh """
-                                git checkout -b ${NEWBRANCH}
-                            """
-                    }
+                
                 sh """
                     git add .
                     git commit -m "${COMMIT_MESSAGE}"
