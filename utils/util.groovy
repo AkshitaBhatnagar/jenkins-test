@@ -14,6 +14,7 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
     def GITHUB_REPO = 'https://github.com/AkshitaBhatnagar/jenkins-test.git'
     // def GITHUB_REPO = 'https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/jenkins-test.git' 
     def BRANCH = 'main'  // Ensure this is the correct branch name
+    def NEWBRANCH = 'turbo_change'
     def COMMIT_MESSAGE = 'Updated Instance type from turbonomic via Jenkins pipeline'
     
     // Clone the repository
@@ -76,9 +77,11 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
             if (changesMade) {
                 echo "Changes detected. Committing and pushing to GitHub."
                 sh """
+                    git checkout ${BRANCH}
+                    git checkout -b ${NEWBRANCH}
                     git add .
                     git commit -m "${COMMIT_MESSAGE}"
-                    git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/jenkins-test.git ${BRANCH}
+                    git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/jenkins-test.git ${NEWBRANCH}
                 """
             } else {
                 // No changes, skip commit and push
