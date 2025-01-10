@@ -77,7 +77,7 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'turbo_token', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
                                             
                         // Call the updateInstance method from the util
-                    	    echo "UpdateInstance method called with ${GITHUB_USERNAME}, ${GITHUB_TOKEN}, ${payload_account}, ${currententity}, ${newentity}"
+                    	    echo "UpdateInstance method called with ${GITHUB_USERNAME}, ${GITHUB_TOKEN}, ${account}, ${currententity}, ${newentity}"
                             turbo_util.UpdateInstance(env.GITHUB_USERNAME, env.GITHUB_TOKEN, env.account, env.currententity, env.newentity)
                         }
                     } catch (Exception e) {
