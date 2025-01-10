@@ -80,10 +80,10 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
                     git fetch origin
                     git checkout ${BRANCH}
                     git pull origin ${BRANCH}
-    
+                    
                     # Check if the turbo_change branch exists, if not, create it
                     git checkout -b ${NEWBRANCH} || git checkout ${NEWBRANCH}
-                    
+                    git pull origin ${NEWBRANCH}
                     git add .
                     git commit -m "${COMMIT_MESSAGE}"
                     git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/AkshitaBhatnagar/jenkins-test.git ${NEWBRANCH}
