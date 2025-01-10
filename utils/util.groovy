@@ -81,7 +81,7 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
                     git checkout -b ${NEWBRANCH}
                     git add .
                     git commit -m "${COMMIT_MESSAGE}"
-                    git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/jenkins-test.git ${NEWBRANCH}
+                    git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/AkshitaBhatnagar/jenkins-test.git ${NEWBRANCH}
                 """
             } else {
                 // No changes, skip commit and push
