@@ -25,7 +25,7 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
         def appConfig = APPLICATION_CONFIG[payload_account]
         if (appConfig) {
             def filePath = appConfig['filepath']
-            def fileType = appConfig['fileType']
+            def fileType = appConfig['type']
 
             if (fileType == 'terraform') {
                 
