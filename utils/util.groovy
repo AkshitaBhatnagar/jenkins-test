@@ -77,8 +77,13 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
             if (changesMade) {
                 echo "Changes detected. Committing and pushing to GitHub."
                 sh """
+                    git fetch origin
                     git checkout ${BRANCH}
-                    git checkout -b ${NEWBRANCH}
+                    git pull origin ${BRANCH}
+    
+                    # Check if the turbo_change branch exists, if not, create it
+                    git checkout -b ${NEWBRANCH} || git checkout ${NEWBRANCH}
+                    
                     git add .
                     git commit -m "${COMMIT_MESSAGE}"
                     git push https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/AkshitaBhatnagar/jenkins-test.git ${NEWBRANCH}
