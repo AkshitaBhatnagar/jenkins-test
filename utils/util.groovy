@@ -34,13 +34,14 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
             def branchExists = sh(script: "git show-ref refs/heads/${NEWBRANCH}", returnStatus: true)
 
             if (branchExists == 0) {
-                echo "Branch ${NEWBRANCH} does not exist. Creating the branch."
-                sh "git checkout -b ${NEWBRANCH}"
-            } else {
                 echo "Branch ${NEWBRANCH} exists. Checking out the branch."
                 sh "git checkout ${NEWBRANCH}"
                 // Ensure it is up to date with the remote turbo_change branch
                 sh "git pull origin ${NEWBRANCH}"
+            } else {
+                
+                echo "Branch ${NEWBRANCH} does not exist. Creating the branch."
+                sh "git checkout -b ${NEWBRANCH}"
             }
             if (fileType == 'terraform') {
                 
