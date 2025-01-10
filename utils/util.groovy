@@ -31,9 +31,9 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
             sh "git pull origin main"
 
             // Check if turbo_change branch exists, if not, create it
-            def branchExists = sh(script: "git show-ref refs/heads/${NEWBRANCH}", returnStatus: true) == 0
+            def branchExists = sh(script: "git show-ref refs/heads/${NEWBRANCH}", returnStatus: true)
 
-            if (!branchExists) {
+            if (branchExists == 0) {
                 echo "Branch ${NEWBRANCH} does not exist. Creating the branch."
                 sh "git checkout -b ${NEWBRANCH}"
             } else {
