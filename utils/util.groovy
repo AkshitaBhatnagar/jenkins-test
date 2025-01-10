@@ -82,7 +82,8 @@ def UpdateInstance(String GITHUB_USERNAME,String GITHUB_TOKEN,String payload_acc
                     git pull origin ${BRANCH}
                     
                     # Check if the turbo_change branch exists, if not, create it
-                    git checkout -b ${NEWBRANCH} || git checkout ${NEWBRANCH}
+                    # git checkout -b ${NEWBRANCH} || 
+                    git checkout ${NEWBRANCH}
                     git pull origin ${NEWBRANCH} --no-rebase
                     git add .
                     git commit -m "${COMMIT_MESSAGE}"
