@@ -11,7 +11,7 @@ release_label = "emr-5.24.0"
 core_ondemand_initial_capacity = 1
 core_ondemand_max_capacity = 1
 
-"task_instance_type" = "t4.micro"
+"task_instance_type" = "t2.micro"
 task_initial_capacity = 1
 task_max_capacity = 6
 task_bid_price = "0.40"
